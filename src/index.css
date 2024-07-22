@@ -3,3 +3,18 @@
 @tailwind utilities;
 
 /* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar{
+    width: 0px;
+    height: 0px;
+}
+body {
+    
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* For browsers that support CSS variables (Chrome, Edge, Safari) */
+body::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}

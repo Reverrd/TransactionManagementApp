@@ -1,7 +1,7 @@
 
 export default function Nav() {
   return (
-    <div className="bg-white fixed top-0 left-0 w-screen z-[50]">
+    <div className="bg-white fixed top-0 left-0 w-screen z-[50] border">
     <div className="w-full px-10  h-[63px] flex justify-between items-center">
       <div>
         <img src="./assets/logo.png" alt="logo" />

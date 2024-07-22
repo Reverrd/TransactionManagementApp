@@ -7,7 +7,7 @@ interface Transaction {
   type: 'credit' | 'debit';
 }
 
-interface TransactionsState {
+export interface TransactionsState {  // Ensure this is exported
   transactions: Transaction[];
 }
 
