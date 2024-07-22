@@ -17,7 +17,7 @@ const Register = () => {
     const token = 'some_token'; // generate a token here
     localStorage.setItem('token', token);
     dispatch(register({ first_name, last_name, email, token }));
-    navigate('/');
+    navigate('/dashboard');
 
   };
 
@@ -63,7 +63,7 @@ const Register = () => {
               <div className="label">
                   <span className="label-text text-[#09090B]">Email Address<sup className='text-red-600'>*</sup></span>
               </div>
-              <input type="text" 
+              <input type="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               placeholder="Enter email address" 

@@ -9,3 +9,9 @@ label{
     font-family: "Plus Jakarta Sans", sans-serif;
     // color: #09090B;
 }
+.ellipsis{
+    max-width: 100px; /* adjust the max width as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

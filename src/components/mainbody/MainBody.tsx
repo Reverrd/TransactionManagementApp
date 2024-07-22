@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../pages/dashboard.scss';
 import { useState, useEffect } from 'react';
 import { Transaction } from '../../interface/typeInterface';
@@ -39,14 +39,17 @@ export default function MainBody() {
     setTransactionTable(updatedTransactions);
     localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
   };
-
+  const navigate = useNavigate()
   const handleEditTransaction = async (updatedTransaction: Transaction) => {
+    navigate('/updateTransaction')
     const index = transactionTable.findIndex((transaction) => transaction.id === updatedTransaction.id);
     if (index !== -1) {
       const updatedTransactions = [...transactionTable];
       updatedTransactions[index] = updatedTransaction;
       setTransactionTable(updatedTransactions);
-      localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
+      localStorage.setItem('transactions', JSON.stringify(updatedTransactions)); 
+      console.log(updatedTransactions)
+      setLoading(false)
     }
   };
   const totalDebit = transactionTable.reduce((acc, current) => {

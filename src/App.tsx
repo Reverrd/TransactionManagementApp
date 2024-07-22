@@ -6,6 +6,7 @@ import Register from './components/auth/Register';
 import Dashboard from './pages/Dashboard';
 import TransactionForm from './components/transactions/TransactionForm';
 import Home from './pages/Home';
+import UpdateTransaction from './components/transactions/UpdateTransaction';
 
 const App: React.FC = () => {
  
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <Route path="/logout" element={<Logout />} /> */}
         <Route path='/transactionForm' element={<TransactionForm />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/updateTransaction" element={<UpdateTransaction/>} />
         <Route path='/' element={<Home />} />
       </Routes>
     </Router>

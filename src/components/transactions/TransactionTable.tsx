@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Transaction } from '../../interface/typeInterface';
+import './transactions.scss'
 export default function MainTable({transactionTable, handleEditTransaction, handleDeleteTransaction}:{
     transactionTable: Transaction[];
     handleEditTransaction: (transaction: Transaction) => void;
@@ -22,7 +23,7 @@ export default function MainTable({transactionTable, handleEditTransaction, hand
                 {transactionTable.length > 0 &&
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   transactionTable.map((transaction:any) => {
-                    console.log(`Rendering transaction: ${JSON.stringify(transaction)}`);
+                    // console.log(`Rendering transaction: ${JSON.stringify(transaction)}`);
                     return (
                       <tr key={transaction.id}>
                         <td className='  flex items-center justify-evenly'>
@@ -31,14 +32,14 @@ export default function MainTable({transactionTable, handleEditTransaction, hand
                             ):(
                                 <img src="./assets/debit.png" alt="debit" />
                             )}</span>
-                            <span className=''>{transaction.reference}</span></td>
+                            <span className='ellipsis'>{transaction.reference}</span></td>
                         <td>NGN{transaction._value}</td>
-                        <td>{transaction.created_at}</td>
-                        <td>{transaction.updated_at}</td>
+                        <td className='ellipsis'>{transaction.created_at}</td>
+                        <td className='ellipsis'>{transaction.updated_at}</td>
                         <td>{'success'}</td>
                         <td className='flex items-center justify-evenly'>
                           <button
-                            onClick={() => handleEditTransaction(transaction)}
+                            onClick={() => handleEditTransaction({...transaction})}
                           >
                             <img src="./assets/pen.png" alt="" />
                           </button>
