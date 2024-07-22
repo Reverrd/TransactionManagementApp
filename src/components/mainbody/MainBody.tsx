@@ -63,14 +63,26 @@ export default function MainBody() {
       localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
     }
   };
-
+  const totalDebit = transactionTable.reduce((acc, current) => {
+    if (current.direction === 'debit') {
+      return acc + current._value;
+    }
+    return acc;
+  }, 0);
+  
+  const totalCredit = transactionTable.reduce((acc, current) => {
+    if (current.direction === 'credit') {
+      return acc + current._value;
+    }
+    return acc;
+  }, 0);
   return (
     <div className="mt-[65px] px-9 md:px-20 text-black h-screen overflow-y-auto">
       <div>
         <div className="flex justify-between items-center">
           <div>
             <h1 className="text-[32px] font-medium">Transactions</h1>
-            <p className="text-[14px] text-[#7F7D83]">
+            <p className="text-[14px] text-[#7F7D83] mb-5">
               View all your transactionTable in the list of products
             </p>
           </div>
@@ -80,15 +92,25 @@ export default function MainBody() {
             </div>
           </Link>
         </div>
-        <div>
-          <div>
-            <h5>Total Balance</h5>
-            <h2>N{}k <span>+1 today</span></h2>
-            <h3>View details</h3>
+        <div className='grid grid-rows-1 grid-cols-3 gap-3'>
+          <div className='bg-[#F9F9F9] rounded-[8px]'>
+            <h5 className='text-[#223E3B] text-[12px] mb-4'>Total Balance</h5>
+            <h2 className='text-[#0A090B] text-2xl font-medium'>N{totalDebit - totalCredit} <span className='text-[#7F7D83] text-sm'>+1 today</span></h2>
+            <h3 className='text-[#7000F6] text-sm'>View details</h3>
+          </div>
+          <div className='bg-[#F9F9F9] rounded-[8px]' >
+            <h5 className='text-[#0C296A] text-[12px] mb-4' >Total Credit</h5>
+            <h2 className='text-[#0A090B] text-2xl font-medium' >N{totalCredit}</h2>
+            <h3 className='text-[#008000] text-sm' >View details</h3>
+          </div>
+          <div className='bg-[#F9F9F9] rounded-[8px]'>
+            <h5 className='text-[#223E3B] text-[12px] mb-4' >Total Debit</h5>
+            <h2 className='text-[#0A090B] text-2xl font-medium'>N{totalDebit} <span className='text-[#7F7D83] text-sm' >+5% today</span></h2>
+            <h3 className='text-[#FF0000] text-sm'>View details</h3>
           </div>
           
         </div>
-        <div>
+        <div className='py-3'>
           <input
             type="text"
             placeholder="Type here"

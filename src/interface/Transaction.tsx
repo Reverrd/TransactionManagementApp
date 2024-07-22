@@ -6,4 +6,5 @@ export interface Transaction {
     updated_at: string;
     status: string;
     action: string;
+    direction: string;
   }
