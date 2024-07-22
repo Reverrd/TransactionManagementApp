@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../../features/Auth/authSlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const Register = () => {
+  const navigate = useNavigate()
   const [first_name, setFirstname] = useState('');
   const [last_name, setLastname] = useState('');
   const [email, setEmail] = useState('');
@@ -15,6 +17,8 @@ const Register = () => {
     const token = 'some_token'; // generate a token here
     localStorage.setItem('token', token);
     dispatch(register({ first_name, last_name, email, token }));
+    navigate('/');
+
   };
 
 

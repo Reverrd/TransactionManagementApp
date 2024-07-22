@@ -20,7 +20,7 @@ export default function MainBody() {
         const data = response.data.transactions;
         setTransactionTable(data);
         setLoading(false);
-        console.log(`this is${JSON.stringify(data)}`);
+        // console.log(`this is${JSON.stringify(data)}`);
         // Save transactions to local storage
         localStorage.setItem('transactions', JSON.stringify(data));
       } catch (err) {
