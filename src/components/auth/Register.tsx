@@ -22,7 +22,7 @@ const Register = () => {
     <>
     <div className='login pb-4 bg-white w-full h-auto flex flex-col  md:flex-row  '>
     <div className='md:flex-[1] md:bg-[#F0EEFF] '>
-      <img className='md:ml-[50px] md:mt-[50px]' src="./assets/logo.png" alt="logo" />
+      <img className='md:ml-[50px] pl-5 pt-3 md:mt-[50px]' src="./assets/logo.png" alt="logo" />
     </div>
     <div className='flex-[4.5]  flex sm:items-center justify-center  md:flex'>
       <div className='w-[90%] sm:w-full flex flex-col sm:items-center justify-center  '>
@@ -85,8 +85,3 @@ const Register = () => {
 };
 
 export default Register;
-{/* <form onSubmit={handleSubmit}>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Register</button>
-    </form>         */}

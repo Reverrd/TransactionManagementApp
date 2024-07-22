@@ -9,7 +9,7 @@ export default function MainTable({transactionTable, handleEditTransaction, hand
     <>
       <table className="table text-black">
               <thead className="bg-[#F9FAFB]">
-                <tr>
+                <tr className='text-black'>
                   <th>References</th>
                   <th>Amount</th>
                   <th>Transaction Date</th>

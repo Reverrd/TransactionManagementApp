@@ -1,40 +1,38 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/Auth/authSlice';
-import { Link } from 'react-router-dom';
-
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      dispatch(login(token));
+    const storedEmail = localStorage.getItem('email');
+    const storedPassword = localStorage.getItem('password');
+    const storedToken = localStorage.getItem('token');
+    if (storedEmail && storedPassword && storedToken) {
+      dispatch(login({ email: storedEmail, password: storedPassword, token: storedToken}));
+      navigate('/dashboard'); // redirect to dashboard page
     }
-  }, [dispatch]);
+  }, [dispatch, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setEmail('')
-    setPassword('')
-    
-    
-      const token = 'Stored-token'
-      
-      
-      localStorage.setItem('token',token);
-      dispatch(login(token));
-    
+    const token = 'Stored-token';
+    localStorage.setItem('token', token);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
+    dispatch(login({email, password, token}));
+    navigate('/dashboard'); // redirect to dashboard page
   };
   return (
     <>
     <div className='login bg-white w-screen h-screen flex flex-col  md:flex-row  '>
     <div className='md:flex-[1] md:bg-[#F0EEFF] '>
-      <img className='md:ml-[50px] md:mt-[50px]' src="./assets/logo.png" alt="logo" />
+      <img className='md:ml-[50px]  pl-5 pt-3 md:mt-[50px]' src="./assets/logo.png" alt="logo" />
     </div>
     <div className='flex-[4.5]  flex sm:items-center justify-center  md:flex'>
       <div className='w-[90%] sm:w-full flex flex-col sm:items-center justify-center  '>

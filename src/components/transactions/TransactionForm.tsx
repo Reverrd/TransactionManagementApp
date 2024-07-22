@@ -52,7 +52,7 @@ const TransactionForm = () => {
                             <select value={transactionDirection} 
                             onChange={(e) => setTransactionDirection(e.target.value as 'credit' | 'debit')} 
                             className="select select-bordered bg-white border-[#E4E4E7]">
-                                <option disabled >--</option>
+                                <option selected disabled >--</option>
                                 <option value="debit" className='text-[#09090B]'>Debit</option>
                                 <option value="credit" className='text-[#09090B]'>Credit</option>
 

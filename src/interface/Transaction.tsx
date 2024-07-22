@@ -7,4 +7,5 @@ export interface Transaction {
     status: string;
     action: string;
     direction: string;
+   
   }
