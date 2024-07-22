@@ -1,34 +1,22 @@
 import React, { useState } from 'react';
-import { registerUser } from '../../services/api';
-import { Link } from 'react-router-dom';
-import { register } from '../../features/Auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { register } from '../../features/Auth/authSlice';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
+  const [first_name, setFirstname] = useState('');
+  const [last_name, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [first_name, setFirstname] = useState('');
-  const [last_name, setLastname] = useState('')
-  const dispatch = useDispatch()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [success, setSuccess] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [error, setError] = useState('');
-  const handleSubmit = async (e: React.FormEvent) => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // setError('');
-    // setSuccess('');
-    try {
-      const userData= await registerUser({ first_name, last_name, email, password });
-      const response = userData
-      dispatch(register(response.data.token));
-      console.log(response)
-      // setSuccess('Account created successfully! Redirecting to login...');
-    } catch (error) {
-      console.error(error);
-      // setError('Failed to create account. Please try again.');
-    }
+    const token = 'some_token'; // generate a token here
+    localStorage.setItem('token', token);
+    dispatch(register({ first_name, last_name, email, token }));
   };
+
 
   return (
     <>

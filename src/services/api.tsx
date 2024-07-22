@@ -17,24 +17,6 @@ export const getTransactions = async (): Promise<Transaction[]> => {
   }
 };
 
-export const registerUser = async (data: any) => {
-  return axios.post(`${API_URL}/pwbt/generate_account`, data,{
-    headers:{Authorization: `Bearer ${live_secret_key}`}
-
-  }
-
-);
-
-};
-
-export const loginUser = async (data: any) => {
-  return axios.post(`${API_URL}/login`, data,{
-    headers:{Authorization: `Bearer ${live_secret_key}`}
-  });
-};
-
-
-
 export const addTransaction = async (token: string, data: any) => {
   return axios.post(`${API_URL}/transactions`, data, {
     headers: { Authorization: `Bearer ${token}` },

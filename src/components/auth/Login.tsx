@@ -1,25 +1,35 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/Auth/authSlice';
-import { loginUser } from '../../services/api';
 import { Link } from 'react-router-dom';
+
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      dispatch(login(token));
+    }
+  }, [dispatch]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await loginUser({ email, password });
-      dispatch(login(response.data.token));
-      console.log(response)
-    } catch (error) {
-      console.error(error);
-    }
+    setEmail('')
+    setPassword('')
+    
+    
+      const token = 'Stored-token'
+      
+      
+      localStorage.setItem('token',token);
+      dispatch(login(token));
+    
   };
-
   return (
     <>
     <div className='login bg-white w-screen h-screen flex flex-col  md:flex-row  '>
