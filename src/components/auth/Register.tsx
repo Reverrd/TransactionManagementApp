@@ -35,7 +35,9 @@ const Register = () => {
               <div className="label">
                   <span className="label-text text-[#09090B]">First Name<sup className='text-red-600'>*</sup></span>
               </div>
-              <input type="text" 
+              <input 
+              required
+              type="text" 
               value={first_name} 
               onChange={(e) => setFirstname(e.target.value)} 
               placeholder="Enter first name" 
@@ -45,7 +47,9 @@ const Register = () => {
               <div className="label">
                   <span className="label-text text-[#09090B]">Last Name<sup className='text-red-600'>*</sup></span>
               </div>
-              <input type="text" 
+              <input 
+              required
+              type="text" 
               value={last_name} 
               onChange={(e) => setLastname(e.target.value)} 
               placeholder="Enter first name" 

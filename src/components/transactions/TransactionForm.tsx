@@ -5,34 +5,47 @@ import { addTransaction as apiAddTransaction } from '../../services/api';
 import Dashboard from '../../pages/Dashboard';
 import { Link } from 'react-router-dom';
 import "./transactions.scss"
+import ErrorAlertBtn from './ErrorAlertBtn';
 const TransactionForm = () => {
   const [amount, setAmount] = useState('');
   
   const [transactionDirection, setTransactionDirection] = useState<'credit' | 'debit'>('debit');
   const[status, setStatus] = useState<'success' | 'pending' | 'failed'>('success')
+  const [error, setError] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAmount('')
     try {
+        setIsLoading(true)
       const token = localStorage.getItem('token');
       if (token) {
         const newTransaction = {  amount, transactionDirection, status };
         const response = await apiAddTransaction(token, newTransaction);
         console.log(response)
         dispatch(addTransaction(response.data));
+        setIsLoading(false)
+        setError(false)
       }
     } catch (error) {
       console.error(error);
+      setError(true)
+      setIsLoading(false)
     }
   };
 
+  const closeError=()=>{
+    setError(false)
+  }
   return (
     <>
+   
     <Dashboard />
+    
     <div className='transaction flex justify-center sm:justify-end  fixed top-0 bg-[#0000007c] z-[500] w-screen h-screen'>
-        <div className='px-4 py-5 bg-white w-full sm:w-[362px]'>
+        <div className='px-4 pt-5 pb-10 bg-white w-full sm:w-[362px]'>
             <Link to={'/dashboard'}>
             <div className='mb-9 cursor-pointer flex justify-center items-center w-8 h-8 rounded-full bg-[#E4E4E7]'>
                 <img src="./assets/close.png" alt="" />
@@ -83,7 +96,11 @@ const TransactionForm = () => {
                             className="bg-white border-[#E4E4E7] input input-bordered w-full sm:max-w-xs" />
                         </label>
                     </div>
-                    <button className="btn bg-[#7000F6] mt-[90px] font-normal   w-full sm:max-w-xs text-white  rounded-md">Add Transaction</button>
+                    {error ? <ErrorAlertBtn closeError={closeError} />: null}
+                    <button className="btn bg-[#7000F6] mt-[90px] font-normal   w-full sm:max-w-xs text-white  rounded-md">{isLoading?(
+                        <span className="loading loading-dots loading-sm"></span>
+                    ): "Add Transaction"}</button>
+                  
                 </form>
             </div>
         </div>

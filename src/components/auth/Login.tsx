@@ -45,7 +45,9 @@ const Login = () => {
               <div className="label">
                   <span className="label-text text-[#09090B]">Email Address<sup className='text-red-600'>*</sup></span>
               </div>
-              <input type="text" 
+              <input 
+              required
+              type="text" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
               placeholder="Enter email address" 
@@ -55,7 +57,9 @@ const Login = () => {
               <div className="label">
                   <span className="label-text text-[#09090B]">Password<sup className='text-red-600'>*</sup></span>
               </div>
-              <input type="password" 
+              <input 
+              required
+              type="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
               placeholder="Enter password" 

@@ -9,3 +9,7 @@ export interface Transaction {
     direction: string;
    
   }
+  
+  export interface ErrorAlertBtnProps {
+    closeError: () => void; // add a type annotation for closeError
+  }

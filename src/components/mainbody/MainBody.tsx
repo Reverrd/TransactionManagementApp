@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 import '../../pages/dashboard.scss';
 import { useState, useEffect } from 'react';
-import { Transaction } from '../../interface/Transaction';
+import { Transaction } from '../../interface/typeInterface';
 import { getTransactions } from '../../services/api';
-import MainTable from './MainTable';
+import MainTable from '../transactions/TransactionTable';
 import './mainbody.scss'
 import FilterButton from './FilterBtn';
 import TransactionSummary from '../transactions/TransactionSummary';
 export default function MainBody() {
   const [transactionTable, setTransactionTable] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -25,24 +25,14 @@ export default function MainBody() {
         localStorage.setItem('transactions', JSON.stringify(data));
       } catch (err) {
         setError('Failed to fetch transactionTable');
-        setLoading(false);
+        setLoading(true);
       }
     };
-
+    
     fetchTransactions();
+    
   }, []);
 
-  useEffect(() => {
-    console.log('Transactions state updated:', transactionTable); // Log state updates
-  }, [transactionTable]);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if (error) {
-    return <p>{error}</p>;
-  }
   const handleDeleteTransaction = async (id: number) => {
     // Filter out the transaction to be deleted
     const updatedTransactions = transactionTable.filter((transaction) => transaction.id !== id);
@@ -74,6 +64,11 @@ export default function MainBody() {
   }, 0);
   return (
     <div className="mt-[65px] px-9 md:px-20 text-black h-screen overflow-y-auto w-screen md:w-full  ">
+      {loading?(
+                        <div className=' h-screen flex justify-center items-center'>
+                        <span className="loading loading-dots w-[10vw] "></span>
+                        </div>
+                    ): (
       <div>
         <div className=" flex justify-between  items-center">
           <div>
@@ -83,7 +78,7 @@ export default function MainBody() {
             </p>
           </div>
           <Link to={'/transactionform'}>
-            <div className="   cursor-pointer flex justify-center items-center bg-[#7000F6] md:w-[56px] md:h-[56px] w-[8vw] h-[8vw] rounded-full">
+            <div className=" addTransactionBtn  cursor-pointer flex justify-center items-center bg-[#7000F6] md:w-[56px] md:h-[56px] w-[8vw] h-[8vw] rounded-full">
               <img src="./assets/add.png" alt="addTransactions" />
             </div>
           </Link>
@@ -113,6 +108,7 @@ export default function MainBody() {
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }

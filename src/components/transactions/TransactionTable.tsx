@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Transaction } from '../../interface/Transaction';
+import { Transaction } from '../../interface/typeInterface';
 export default function MainTable({transactionTable, handleEditTransaction, handleDeleteTransaction}:{
     transactionTable: Transaction[];
     handleEditTransaction: (transaction: Transaction) => void;
